@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { EventBusService } from './event-bus.service';
+import { EventBusService, EventData } from './event-bus.service';
 
 describe('EventBusService', () => {
   let service: EventBusService;
@@ -12,5 +11,11 @@ describe('EventBusService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+});
+
+describe('Event', () => {
+  it('should create an instance', () => {
+    expect(new EventData('logout', null)).toBeTruthy();
   });
 });

@@ -1,10 +1,8 @@
-import { HTTP_INTERCEPTORS, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
-
+import { environment } from '../../../environments/environment';
 import { TokenService } from '../..//services/token/token.service';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -18,20 +16,25 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private tokenService: TokenService, private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
-    let authReq = req;
+    // Don't add bearer token for request not to the api
+    if (!req.url.startsWith(environment.apiUrl))
+      return next.handle(req);
+
     const authToken = this.tokenService.getAuthToken();
 
-    if (authToken != null) {
-      authReq = this.addTokenHeader(req, authToken);
-    }
+    // No auth-token means also no refresh token -> no point in refreshing
+    if (authToken == null)
+      return next.handle(req);
 
+    // TODO: Check if token is expired an refresh when needed before 401
+    req = this.addTokenHeader(req, authToken);
 
-    return next.handle(authReq).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && !authReq.url.includes('auth/login') && error.status === 401) {
-        return this.handle401Error(authReq, next);
+    return next.handle(req).pipe(catchError(error => {
+      if (error instanceof HttpErrorResponse && !req.url.includes('auth/login') && error.status === 401) {
+        return this.handle401Error(req, next);
       }
 
-      return throwError(error);
+      return throwError(() => error);
     }));
   }
 
@@ -55,7 +58,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.isRefreshing = false;
 
             this.tokenService.signOut();
-            return throwError(err);
+            return throwError(() => err);
           })
         );
     }

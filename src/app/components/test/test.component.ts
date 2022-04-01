@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventData } from 'src/app/classes/event/event';
-
 import { AuthService } from '../../services/auth/auth.service';
-import { EventBusService } from '../../services/event-bus/event-bus.service';
+import { EventBusService, EventData } from '../../services/event-bus/event-bus.service';
 
 @Component({
   selector: 'app-test',

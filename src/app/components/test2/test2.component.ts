@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { EventBusService } from '../../services/event-bus/event-bus.service';
-import { EventData } from '../..//classes/event/event';
+import { EventBusService, EventData } from '../../services/event-bus/event-bus.service';
 
 @Component({
   selector: 'app-test2',
