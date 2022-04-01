@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Subscription } from 'rxjs';
 
+import { environment } from '../environments/environment';
 import { TokenService } from './services/token/token.service';
 import { AuthService } from './services/auth/auth.service';
 import { EventBusService } from './services/event-bus/event-bus.service';
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'gui-website';
+  title = environment.title;
   eventBusSubscriptions: Subscription[] = [];
 
   constructor(private tokenService: TokenService, private authService: AuthService, private eventBusService: EventBusService) { }

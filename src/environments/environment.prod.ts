@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  title: 'gui-website',
+  apiUrl: '/api/v1',
 };
