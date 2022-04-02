@@ -2,6 +2,7 @@
 
 !src/
 !angular.json
+!nginx.conf
 !.browserslistrc
 !package-lock.json
 !package.json
