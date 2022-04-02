@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { AuthService, LoginInput } from '../../services/auth/auth.service';
 import { EventBusService, EventData } from '../../services/event-bus/event-bus.service';
 
 @Component({
@@ -12,7 +12,11 @@ export class TestComponent implements OnInit {
   constructor(private authService: AuthService, private eventBusService: EventBusService) { }
 
   ngOnInit(): void {
-    this.authService.login('user01@test.com', 'toor123').subscribe(data => {this.eventBusService.emit(new EventData('login', data))});
+    const input: LoginInput = {
+      email: 'user02@test.com',
+      password: 'toor123',
+    }
+    this.authService.login(input).subscribe(data => {this.eventBusService.emit(new EventData('login', data))});
   }
 
 }

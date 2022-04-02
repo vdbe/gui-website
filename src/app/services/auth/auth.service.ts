@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
-
 const AUTH_API = environment.apiUrl + '/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,10 +15,18 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<Object> {
+  register(input: RegisterInput): Observable<Object> {
+    return this.http.post(AUTH_API + 'register', {
+      name: input.username,
+      email: input.email,
+      password: input.password,
+    }, httpOptions);
+  }
+
+  login(input: LoginInput): Observable<Object> {
     return this.http.post(AUTH_API + 'login', {
-      email: email,
-      password: password
+      email: input.email,
+      password: input.password,
     }, httpOptions);
   }
 
@@ -38,4 +45,15 @@ export class AuthService {
   getUser(roken: string): Observable<Object> {
     return this.http.get(AUTH_API + 'authorize', httpOptions);
   }
+}
+
+export interface RegisterInput {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginInput {
+  email: string;
+  password: string;
 }

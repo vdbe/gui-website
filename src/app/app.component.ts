@@ -5,9 +5,6 @@ import { AuthService } from './services/auth/auth.service';
 import { EventBusService } from './services/event-bus/event-bus.service';
 import { TokenService } from './services/token/token.service';
 
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
