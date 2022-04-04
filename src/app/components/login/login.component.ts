@@ -19,11 +19,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  form = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
-  });
-
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -33,14 +28,6 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private eventBusService: EventBusService) { }
 
   ngOnInit(): void { }
-
-  test(): void {
-
-    console.log(this.loginForm.errors)
-    console.log(this.loginForm.hasError('email', 'email'))
-    console.log(this.loginForm.hasError('email.required'))
-    console.log(this.loginForm.hasError('required', 'email'))
-  }
 
   onSubmit(): void {
     const input: LoginInput = {

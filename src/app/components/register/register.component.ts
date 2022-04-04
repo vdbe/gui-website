@@ -20,13 +20,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class RegisterComponent implements OnInit {
-  form = this.formBuilder.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
-    passwordRepeat: [''],
-  }, { validator: checkIfFormIsValid });
-
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -41,9 +34,9 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     const input: RegisterInput = {
-      username: this.form.get('name')!.value,
-      email: this.form.get('email')!.value,
-      password: this.form.get('password')!.value,
+      username: this.registerForm.get('name')!.value,
+      email: this.registerForm.get('email')!.value,
+      password: this.registerForm.get('password')!.value,
     }
 
     this.authService.register(input).subscribe({
