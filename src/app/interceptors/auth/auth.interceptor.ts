@@ -7,6 +7,7 @@ import { TokenService } from '../..//services/token/token.service';
 import { AuthService } from '../../services/auth/auth.service';
 
 const TOKEN_HEADER_KEY = 'Authorization';
+const BLACK_LIST: Array<string> = ['/auth/login', '/auth/logout', '/auth/register']
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -17,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     // Don't add bearer token for request not to the api
-    if (!req.url.startsWith(environment.apiUrl))
+    if (!req.url.startsWith(environment.apiUrl) || (BLACK_LIST.includes(req.url.slice(environment.apiUrl.length))))
       return next.handle(req);
 
     const authToken = this.tokenService.getAuthToken();
@@ -30,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req = this.addTokenHeader(req, authToken);
 
     return next.handle(req).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && !req.url.includes('auth/login') && error.status === 401) {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
         return this.handle401Error(req, next);
       }
 

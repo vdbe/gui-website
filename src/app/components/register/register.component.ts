@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService, RegisterInput } from '../../services/auth/auth.service';
-import { EventBusService, EventData } from '../../services/event-bus/event-bus.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -28,7 +27,7 @@ export class RegisterComponent implements OnInit {
   }, passwordMatch)
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private eventBusService: EventBusService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void { }
 
@@ -39,13 +38,10 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.get('password')!.value,
     }
 
-    this.authService.register(input).subscribe({
-      next: (data) => this.eventBusService.emit(new EventData("login", data)),
-      error: (err) => {
-        // TODO: Handle errors
-        console.error(err);
-      },
-    });
+    this.authService.register(input).catch((err) => {
+      // TODO: handle errors
+      console.error(err);
+    })
   }
 }
 

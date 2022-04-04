@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   })
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private eventBusService: EventBusService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void { }
 
@@ -35,12 +36,10 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password')!.value,
     };
 
-    this.authService.login(input).subscribe({
-      next: (data) => this.eventBusService.emit(new EventData("login", data)),
-      error: (err) => {
-        // TODO: Handle errors
-        console.error(err);
-      },
-    });
+    this.authService.login(input).catch((err: HttpErrorResponse) => {
+      // TODO: handle errors
+      console.error(err);
+    })
+
   }
 }
