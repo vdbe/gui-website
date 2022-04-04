@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService, LoginInput } from '../../services/auth/auth.service';
-import { EventBusService, EventData } from '../../services/event-bus/event-bus.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -26,7 +25,7 @@ export class LoginComponent implements OnInit {
   })
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void { }
 
