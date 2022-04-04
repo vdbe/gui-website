@@ -1,35 +1,45 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full, max-w-lg">
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <label for="user-name">User name: </label>
-      <input id="user-name" type="text" formControlName="name">
-    </div>
-  </div>
-
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <label for="Email">email: </label>
-      <input id="email" type="email" formControlName="email">
-    </div>
-  </div>
-
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <label for="password">Password: </label>
-      <input id="password" type="password" formControlName="password">
-    </div>
-  </div>
-
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <label for="password-repeat">Password repeat: </label>
-      <input id="password-repeat" type="password" formControlName="passwordRepeat">
-    </div>
-  </div>
-
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <button type="submit" [disabled]="!form.valid">Register</button>
-    </div>
-  </div>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="min-w-fit max-w-lg w-full text-center">
+  <mat-form-field class="w-full" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex. Bob">
+    <mat-error *ngIf="registerForm.hasError('email', 'email') && !registerForm.hasError('required', 'email')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="registerForm.hasError('required', 'email')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="w-full" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+      placeholder="Ex. superman@krypton.an">
+    <mat-error *ngIf="registerForm.hasError('email', 'email') && !registerForm.hasError('required', 'email')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="registerForm.hasError('required', 'email')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="w-full" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher"
+      placeholder="Ex. superman@krypton.an">
+    <mat-error *ngIf="registerForm.hasError('required', 'password')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="w-full" appearance="fill">
+    <mat-label>Password confirmation</mat-label>
+    <input type="password" matInput formControlName="passwordRepeat" [errorStateMatcher]="matcher"
+      placeholder="Ex. superman@krypton.an">
+    <mat-error
+      *ngIf="registerForm.hasError('match', 'passwordRepeat') && !registerForm.hasError('required', 'password')">
+      Passwords don't match
+    </mat-error>
+    <mat-error *ngIf="registerForm.hasError('required', 'passwordRepeat')">
+      Password confirmation is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button class="w-1/3" color="primary" type="submit"
+    [disabled]="!registerForm.valid">Register</button>
 </form>
