@@ -21,14 +21,10 @@ export class AppComponent implements OnInit, OnDestroy {
   user: User | null = null;
 
   constructor(private tokenService: TokenService, private authService: AuthService, private eventBusService: EventBusService, private router: Router) {
-    console.log(this.tokenService.getRefreshToken())
-    console.log(this.loggedIn)
-    console.log(this.user)
-    console.log(router)
-
     if (this.tokenService.getRefreshToken() == null) {
       this.router.navigate(['login']);
     }
+    this.loggedIn = true;
   }
 
   ngOnInit(): void {
@@ -49,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (refreshToken) {
       this.authService.logout(refreshToken).catch((err) => {
         // TODO: handle errors
-        console.log(err);
+        console.error(err);
       })
     }
 
@@ -69,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.authService.logout(refreshToken).catch((err) => {
       // TODO: handle errors
-      console.log(err);
+      console.error(err);
     })
   }
 
@@ -97,7 +93,6 @@ export class AppComponent implements OnInit, OnDestroy {
       createdAt: data.created_at,
       updatedAt: data.updated_at,
     }
-    console.log(user);
     this.user = user;
   }
 }
