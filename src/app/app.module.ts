@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { TestComponent } from './components/test/test.component';
 import { authInterceptorProviders } from './interceptors/auth/auth.interceptor';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -22,7 +21,6 @@ import { LogoutComponent } from './components/logout/logout.component';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    TestComponent,
     AuthorizeComponent,
     DashboardComponent,
     LogoutComponent,
