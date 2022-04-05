@@ -19,6 +19,7 @@ export class AuthService {
   register(input: RegisterInput): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.http.post(AUTH_API + '/register', {
+        name: input.name,
         email: input.email,
         password: input.password,
       }, httpOptions)
@@ -59,7 +60,7 @@ export class AuthService {
       }, httpOptions)
         .subscribe({
           next: (res: any) => {
-            this.eventBusService.emit(new EventData('logout', res))
+            this.eventBusService.emit(new EventData('sign-out', res))
             resolve();
           },
           error: (err) => {
@@ -92,7 +93,7 @@ export class AuthService {
 }
 
 export interface RegisterInput {
-  username: string;
+  name: string;
   email: string;
   password: string;
 }

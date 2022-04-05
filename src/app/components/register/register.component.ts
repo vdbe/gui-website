@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     const input: RegisterInput = {
-      username: this.registerForm.get('name')!.value,
+      name: this.registerForm.get('name')!.value,
       email: this.registerForm.get('email')!.value,
       password: this.registerForm.get('password')!.value,
     }
