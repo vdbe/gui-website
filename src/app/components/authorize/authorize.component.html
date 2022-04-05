@@ -1,13 +1,9 @@
-<div class="relative top-[10%]">
-    <div class="child">
-    <mat-tab-group class="min-w-fit max-w-screen-lg w-full text-center items-center" mat-align-tabs="center"
-        [selectedIndex]="index" dynamicHeight>
-        <mat-tab label="Login">
-            <app-login></app-login>
-        </mat-tab>
-        <mat-tab label="Register">
-            <app-register></app-register>
-        </mat-tab>
-    </mat-tab-group>
-    </div>
-</div>
+<mat-tab-group class="min-w-fit max-w-screen-lg w-full text-center items-center" mat-align-tabs="center"
+    [selectedIndex]="index" dynamicHeight>
+    <mat-tab label="Login">
+        <app-login></app-login>
+    </mat-tab>
+    <mat-tab label="Register">
+        <app-register></app-register>
+    </mat-tab>
+</mat-tab-group>

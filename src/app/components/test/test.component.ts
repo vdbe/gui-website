@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.scss']
 })
 export class TestComponent {
   index: number;

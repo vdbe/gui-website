@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-authorize',
   templateUrl: './authorize.component.html',
-  styleUrls: ['./authorize.component.css']
+  styleUrls: ['./authorize.component.scss']
 })
 export class AuthorizeComponent {
   index: number;

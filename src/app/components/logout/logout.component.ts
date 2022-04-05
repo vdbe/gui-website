@@ -4,7 +4,7 @@ import { EventBusService, EventData } from 'src/app/services/event-bus/event-bus
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.css']
+  styleUrls: ['./logout.component.scss']
 })
 export class LogoutComponent {
 
