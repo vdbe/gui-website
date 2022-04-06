@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
 const routes: Routes = [
+  {path: '', pathMatch: 'prefix', redirectTo: 'dashboard'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'register', component: AuthorizeComponent},
   {path: 'login', component: AuthorizeComponent},

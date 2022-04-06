@@ -24,8 +24,9 @@ export class AuthInterceptor implements HttpInterceptor {
     const authToken = this.tokenService.getAuthToken();
 
     // No auth-token means also no refresh token -> no point in refreshing
-    if (authToken == null)
+    if (authToken == null) {
       return next.handle(req);
+    }
 
     // TODO: Check if token is expired an refresh when needed before 401
     req = this.addTokenHeader(req, authToken);

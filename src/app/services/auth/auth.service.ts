@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { EventBusService, EventData } from '../event-bus/event-bus.service';
+import { SharedService } from '../shared/shared.service';
 
 
 const AUTH_API = environment.apiUrl + '/auth';
@@ -15,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private eventBusService: EventBusService) { }
+  constructor(private http: HttpClient, private eventBusService: EventBusService, private sharedService: SharedService) { }
 
   register(input: RegisterInput): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -26,7 +27,8 @@ export class AuthService {
       }, httpOptions)
         .subscribe({
           next: (res: any) => {
-            this.eventBusService.emit(new EventData('register', res))
+            this.eventBusService.emit(new EventData('login', res))
+            this.sharedService.loggedIn = true;
             resolve();
           },
           error: (err) => {
@@ -45,6 +47,7 @@ export class AuthService {
         .subscribe({
           next: (res: any) => {
             this.eventBusService.emit(new EventData('login', res))
+            this.sharedService.loggedIn = true;
             resolve();
           },
           error: (err) => {
@@ -62,6 +65,8 @@ export class AuthService {
         .subscribe({
           next: (res: any) => {
             this.eventBusService.emit(new EventData('sign-out', res))
+            this.sharedService.loggedIn = false;
+            this.sharedService.user = null
             resolve();
           },
           error: (err) => {
@@ -88,6 +93,9 @@ export class AuthService {
               createdAt: res.created_at,
               updatedAt: res.updated_at,
             }
+            this.sharedService.loggedIn = true;
+            this.sharedService.user = user;
+            this.eventBusService.emit(new EventData('updated-user', null));
             resolve(user);
           },
           error: (err) => {
