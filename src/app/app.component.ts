@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // TODO: test this
-    this.eventBusSubscriptions.forEach( subscription => { subscription.unsubscribe() })
+    this.eventBusSubscriptions.forEach(subscription => { subscription.unsubscribe() })
   }
 
   login(data: any): void {
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.tokenService.saveAuthToken(data.access_token);
     this.tokenService.saveRefreshToken(data.refresh_token);
-    
+
     this.router.navigate(['dashboard']);
   }
 
@@ -85,14 +85,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['login']);
   }
 
-  updateUser(data: any): void {
-    this.loggedIn = true;
-    const user: User = {
-      name: data.name,
-      email: data.email,
-      createdAt: data.created_at,
-      updatedAt: data.updated_at,
+  updateUser(user: User | null): void {
+    if (!user) {
+      this.authService.getUser().then((ret) => { user = ret }).catch((err) => {
+        // TODO: Handle error
+        console.log(err);
+      })
     }
+    this.loggedIn = true;
     this.user = user;
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/interfaces/user';
 import { environment } from 'src/environments/environment';
 import { EventBusService, EventData } from '../event-bus/event-bus.service';
 
@@ -76,13 +77,18 @@ export class AuthService {
     }, httpOptions);
   }
 
-  updateUser(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+  getUser(): Promise<User> {
+    return new Promise<User>((resolve, reject) => {
       this.http.get(AUTH_API + '/authorize', httpOptions)
         .subscribe({
           next: (res: any) => {
-            this.eventBusService.emit(new EventData('update-user', res))
-            resolve();
+            const user: User = {
+              name: res.name,
+              email: res.email,
+              createdAt: res.created_at,
+              updatedAt: res.updated_at,
+            }
+            resolve(user);
           },
           error: (err) => {
             reject(err);
