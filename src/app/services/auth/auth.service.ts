@@ -29,6 +29,7 @@ export class AuthService {
           next: (res: any) => {
             this.eventBusService.emit(new EventData('login', res))
             this.sharedService.loggedIn = true;
+            this.getUser()
             resolve();
           },
           error: (err) => {
@@ -48,6 +49,7 @@ export class AuthService {
           next: (res: any) => {
             this.eventBusService.emit(new EventData('login', res))
             this.sharedService.loggedIn = true;
+            this.getUser()
             resolve();
           },
           error: (err) => {
@@ -66,7 +68,7 @@ export class AuthService {
           next: (res: any) => {
             this.eventBusService.emit(new EventData('sign-out', res))
             this.sharedService.loggedIn = false;
-            this.sharedService.user = null
+            this.sharedService.user = undefined;
             resolve();
           },
           error: (err) => {

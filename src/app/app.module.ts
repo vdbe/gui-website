@@ -15,6 +15,10 @@ import { authInterceptorProviders } from './interceptors/auth/auth.interceptor';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu'; 
 
 @NgModule({
   declarations: [
@@ -35,6 +39,10 @@ import { LogoutComponent } from './components/logout/logout.component';
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatMenuModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

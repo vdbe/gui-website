@@ -1,2 +1,29 @@
-<p>dashboard works!</p>
-<p>{{this.shared.user?.email}}</p>
+<mat-toolbar color="primary" class="max-w-full">
+    <button (click)="drawer.toggle()" mat-icon-button aria-label="Main menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="flex-auto"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        {{this.shared.user?.name}}
+        <mat-icon>person</mat-icon>
+        <mat-icon>menu:down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button href="/profile" mat-menu-item>Profile</button>
+        <a href="/logout" mat-menu-item>Logout</a>
+    </mat-menu>
+
+</mat-toolbar>
+
+<mat-drawer-container class="h-[100vh]" autosize>
+    <mat-drawer #drawer class="sm:p-2 md:p-5 min-h-fit h-fit" color="primary" mode="side">
+        <p>Item 1</p>
+        <p>Item 2</p>
+        <p>Item 3</p>
+    </mat-drawer>
+
+    <div class="sm-p2 md:p-5">
+        <p>dashboard works!</p>
+    </div>
+</mat-drawer-container>

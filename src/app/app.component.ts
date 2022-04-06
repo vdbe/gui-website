@@ -19,11 +19,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private tokenService: TokenService, private authService: AuthService, private eventBusService: EventBusService, private router: Router, private shared: SharedService) {
     if (this.tokenService.getRefreshToken()) {
-      this.shared.loggedIn = true;
-      this.authService.getUser().catch((err) => {
-        console.error(err)
-        // TODO: Handle errors
-      });
+      if (!this.shared.loggedIn) {
+        this.shared.loggedIn = true;
+        this.authService.getUser().catch((err) => {
+          // TODO: Handle errors
+          console.log(err)
+        });
+      }
     } else {
       this.shared.loggedIn = false;
     }

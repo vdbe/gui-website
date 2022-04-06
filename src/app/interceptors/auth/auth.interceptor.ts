@@ -17,6 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private tokenService: TokenService, private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
+    console.log(req.url);
     // Don't add bearer token for request not to the api
     if (!req.url.startsWith(environment.apiUrl) || (BLACK_LIST.includes(req.url.slice(environment.apiUrl.length))))
       return next.handle(req);

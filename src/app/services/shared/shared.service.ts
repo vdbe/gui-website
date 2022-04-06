@@ -5,8 +5,8 @@ import { User } from 'src/app/interfaces/user';
   providedIn: 'root'
 })
 export class SharedService {
-  loggedIn: Boolean = false;
-  user: User | null = null;
+  loggedIn?: Boolean;
+  user?: User;
 
   constructor() { }
 }
