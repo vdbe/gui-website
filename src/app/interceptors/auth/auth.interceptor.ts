@@ -7,7 +7,7 @@ import { TokenService } from '../..//services/token/token.service';
 import { AuthService } from '../../services/auth/auth.service';
 
 const TOKEN_HEADER_KEY = 'Authorization';
-const BLACK_LIST: Array<string> = ['/auth/login', '/auth/logout', '/auth/register']
+const API_BLACKLIST = ['/auth/login', '/auth/logout', '/auth/register', '/auth/token'];
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -16,25 +16,24 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private tokenService: TokenService, private authService: AuthService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
-    console.log(req.url);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     // Don't add bearer token for request not to the api
-    if (!req.url.startsWith(environment.apiUrl) || (BLACK_LIST.includes(req.url.slice(environment.apiUrl.length))))
-      return next.handle(req);
+    if (!request.url.startsWith(environment.apiUrl) || API_BLACKLIST.some((route) => request.url.slice(environment.apiUrl.length).startsWith(route)))
+      return next.handle(request);
 
     const authToken = this.tokenService.getAuthToken();
 
     // No auth-token means also no refresh token -> no point in refreshing
     if (authToken == null) {
-      return next.handle(req);
+      return next.handle(request);
     }
 
     // TODO: Check if token is expired an refresh when needed before 401
-    req = this.addTokenHeader(req, authToken);
+    request = this.addTokenHeader(request, authToken);
 
-    return next.handle(req).pipe(catchError(error => {
+    return next.handle(request).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse && error.status === 401) {
-        return this.handle401Error(req, next);
+        return this.handle401Error(request, next);
       }
 
       return throwError(() => error);
