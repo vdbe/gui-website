@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedService } from 'src/app/services/shared/shared.service';
+import { SharedService } from '../../services/shared/shared.service';
 
 @Component({
   selector: 'app-authorize',
@@ -16,4 +16,5 @@ export class AuthorizeComponent {
     }
     this.index = this.router.url == '/login' ? 0 : 1;
   }
+
 }
