@@ -15,9 +15,22 @@ export class StateService {
 
   constructor(private http: HttpClient) { }
 
-  getStates(): Promise<State[]> {
+  getStates(name?: string, desc?: string): Promise<State[]> {
     return new Promise<State[]>((resolve, reject) => {
-      this.http.get(STATE_API, httpOptions)
+      let searchParams: any = {};
+      if (name !== undefined) {
+        searchParams['name'] = name;
+      }
+      if (desc !== undefined) {
+        searchParams['description'] = desc;
+      }
+
+      const localHttpOptions = {
+        params: searchParams,
+        ...httpOptions,
+      };
+
+      this.http.get(STATE_API, localHttpOptions)
         .subscribe({
           next: (res: any) => {
             let states: State[] = [];

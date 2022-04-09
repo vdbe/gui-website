@@ -14,12 +14,33 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TaskService {
-
   constructor(private http: HttpClient) { }
 
-  getTasks(): Promise<Task[]> {
+  getTasks(progress?: string | number, title?: string, desc?: string, createdBy?: string, takenBy?: string): Promise<Task[]> {
     return new Promise<Task[]>((resolve, reject) => {
-      this.http.get(TASK_API, httpOptions)
+      let searchParams: any = {};
+      if (progress !== undefined) {
+        searchParams['progress'] = progress;
+      }
+      if (title !== undefined) {
+        searchParams['title'] = title;
+      }
+      if (desc !== undefined) {
+        searchParams['description'] = desc;
+      }
+      if (createdBy !== undefined) {
+        searchParams['createdBy'] = createdBy;
+      }
+      if (takenBy !== undefined) {
+        searchParams['takenBy'] = takenBy;
+      }
+
+      const localHttpOptions = {
+        params: searchParams,
+        ...httpOptions,
+      };
+
+      this.http.get(TASK_API, localHttpOptions)
         .subscribe({
           next: (res: any) => {
             let tasks: Task[] = [];
