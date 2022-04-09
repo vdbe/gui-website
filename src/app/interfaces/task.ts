@@ -1,0 +1,11 @@
+export interface Task {
+    nr: number;
+    progress: number;
+    createdBy: string;
+    takenBy: string | null;
+    createdAt: Date;
+    takenAt: Date | null;
+    completedAt: Date | null;
+    title: string;
+    description: string;
+}
