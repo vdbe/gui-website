@@ -9,3 +9,9 @@ export interface Task {
     title: string;
     description: string;
 }
+
+export interface CreateTaskInput {
+    title: string;
+    description: string;
+    state: number | string;
+}
