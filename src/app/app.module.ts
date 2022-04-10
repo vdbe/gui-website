@@ -18,7 +18,10 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatMenuModule } from '@angular/material/menu'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskStateNamePipe } from './pipes/task-state-name.pipe';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { MatMenuModule } from '@angular/material/menu';
     AuthorizeComponent,
     DashboardComponent,
     LogoutComponent,
+    TaskCardComponent,
+    TaskStateNamePipe,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +48,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
+    MatCardModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

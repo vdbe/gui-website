@@ -23,6 +23,8 @@
     </mat-drawer>
 
     <div class="sm-p2 md:p-5">
-        <p>dashboard works!</p>
+        <div class="task-card-container flex flex-wrap">
+            <app-task-card *ngFor="let task of tasks;" [task]="task" [stateName]="states | taskStateName :task.progress"></app-task-card>
+        </div>
     </div>
 </mat-drawer-container>
