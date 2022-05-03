@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path: '', pathMatch: 'prefix', redirectTo: 'dashboard'},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'register', component: AuthorizeComponent},
   {path: 'login', component: AuthorizeComponent},
-  {path: 'logout', component: LogoutComponent},
+  {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

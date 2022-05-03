@@ -17,9 +17,6 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(public shared: SharedService, private router: Router, private stateService: StateService, private taskService: TaskService) {
-    if (!this.shared.loggedIn) {
-      this.router.navigate(['login']);
-    }
   }
 
   ngOnInit(): void {

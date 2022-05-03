@@ -13,25 +13,25 @@ export class TokenService {
 
   constructor() { }
 
-  signOut(): void {
-    window.sessionStorage.clear();
+  static signOut(): void {
+    window.localStorage.clear();
   }
 
-  public saveAuthToken(token: AuthToken): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+  static saveAuthToken(token: AuthToken): void {
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, token);
   }
 
-  public getAuthToken(): AuthToken | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+  static getAuthToken(): AuthToken | null {
+    return window.localStorage.getItem(TOKEN_KEY);
   }
 
-  public saveRefreshToken(token: AuthToken): void {
-    window.sessionStorage.removeItem(REFRESHTOKEN_KEY);
-    window.sessionStorage.setItem(REFRESHTOKEN_KEY, token);
+  static saveRefreshToken(token: AuthToken): void {
+    window.localStorage.removeItem(REFRESHTOKEN_KEY);
+    window.localStorage.setItem(REFRESHTOKEN_KEY, token);
   }
 
-  public getRefreshToken(): RefreshToken | null {
-    return window.sessionStorage.getItem(REFRESHTOKEN_KEY);
+  static getRefreshToken(): RefreshToken | null {
+    return window.localStorage.getItem(REFRESHTOKEN_KEY);
   }
 }

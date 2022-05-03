@@ -22,35 +22,44 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskStateNamePipe } from './pipes/task-state-name.pipe';
 import { MatCardModule } from '@angular/material/card';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { TokenService } from './services/token/token.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    AuthorizeComponent,
-    DashboardComponent,
-    LogoutComponent,
-    TaskCardComponent,
-    TaskStateNamePipe,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatCardModule,
-  ],
-  providers: [authInterceptorProviders],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        RegisterComponent,
+        LoginComponent,
+        AuthorizeComponent,
+        DashboardComponent,
+        LogoutComponent,
+        TaskCardComponent,
+        TaskStateNamePipe,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatMenuModule,
+        MatCardModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return TokenService.getAuthToken();
+                },
+            }
+        }),
+    ],
+    providers: [authInterceptorProviders, JwtHelperService],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }
