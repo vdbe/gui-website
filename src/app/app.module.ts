@@ -24,6 +24,8 @@ import { TaskStateNamePipe } from './pipes/task-state-name.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { TokenService } from './services/token/token.service';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +37,8 @@ import { TokenService } from './services/token/token.service';
         LogoutComponent,
         TaskCardComponent,
         TaskStateNamePipe,
+        CreateTaskComponent,
+        TasksComponent,
     ],
     imports: [
         BrowserModule,

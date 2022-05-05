@@ -10,21 +10,26 @@
         <mat-icon>menu:down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <a href="/profile" mat-menu-item>Profile</a>
-        <a href="/logout" mat-menu-item>Logout</a>
+        <a [routerLink]="['/profile']" mat-menu-item>Profile</a>
+        <a [routerLink]="['/logout']" mat-menu-item>Logout</a>
     </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container class="h-[100vh]" autosize>
     <mat-drawer #drawer class="sm:p-2 md:p-5 min-h-fit h-fit" color="primary" mode="side">
-        <p>Item 1</p>
-        <p>Item 2</p>
-        <p>Item 3</p>
+        <p>
+        <a mat-raised-button [routerLink]="['/', 'dashboard', 'tasks']" color="primary">Tasks</a>
+        </p>
+        <p>
+        <a mat-raised-button [routerLink]="['/', 'dashboard', 'tasks', 'create']" color="primary">Create new task</a>
+        </p>
+        <p>
+        <button mat-raised-button color="primary">Create new state</button>
+        </p>
+        <hr>
     </mat-drawer>
 
-    <div class="sm-p2 md:p-5">
-        <div class="task-card-container flex flex-wrap">
-            <app-task-card *ngFor="let task of tasks;" [task]="task" [stateName]="states | taskStateName :task.progress"></app-task-card>
-        </div>
+    <div class="min-w-fit max-w-screen-lg w-full m-auto">
+    <router-outlet></router-outlet>
     </div>
 </mat-drawer-container>

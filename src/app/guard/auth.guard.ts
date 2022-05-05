@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
     canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         const token = TokenService.getAuthToken()
         if (!token || this.jwtHelper.isTokenExpired(token)) {
-            console.log("Guard false");
             this.router.navigate(['login']);
             return false;
         }
