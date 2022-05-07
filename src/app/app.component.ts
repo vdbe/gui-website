@@ -17,8 +17,8 @@ export class AppComponent implements OnInit, OnDestroy {
   title = environment.title;
   eventBusSubscriptions: Subscription[] = [];
 
-  constructor(private tokenService: TokenService, private authService: AuthService, private eventBusService: EventBusService, private router: Router, private shared: SharedService) {
-    if (this.tokenService.getRefreshToken()) {
+  constructor(private authService: AuthService, private eventBusService: EventBusService, private router: Router, private shared: SharedService) {
+    if (TokenService.getRefreshToken()) {
       if (!this.shared.loggedIn) {
         this.shared.loggedIn = true;
         this.authService.getUser().catch((err) => {
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   login(data: any): void {
-    const refreshToken = this.tokenService.getRefreshToken();
+    const refreshToken = TokenService.getRefreshToken();
 
     if (refreshToken) {
       this.authService.logout(refreshToken).catch((err) => {
@@ -52,14 +52,14 @@ export class AppComponent implements OnInit, OnDestroy {
       })
     }
 
-    this.tokenService.saveAuthToken(data.access_token);
-    this.tokenService.saveRefreshToken(data.refresh_token);
+    TokenService.saveAuthToken(data.access_token);
+    TokenService.saveRefreshToken(data.refresh_token);
 
     this.router.navigate(['dashboard']);
   }
 
   logout(): void {
-    const refreshToken = this.tokenService.getRefreshToken();
+    const refreshToken = TokenService.getRefreshToken();
 
     if (!refreshToken) {
       this.router.navigate(['login']);
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   signOut(): void {
-    const refreshToken = this.tokenService.getRefreshToken();
+    const refreshToken = TokenService.getRefreshToken();
 
     if (!refreshToken) {
       console.error('Tried to signout without stored refresh token')
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.tokenService.signOut();
+    TokenService.signOut();
     this.router.navigate(['login']);
   }
 }

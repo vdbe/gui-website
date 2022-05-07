@@ -14,14 +14,14 @@ export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private tokenService: TokenService, private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     // Don't add bearer token for request not to the api
     if (!request.url.startsWith(environment.apiUrl) || API_BLACKLIST.some((route) => request.url.slice(environment.apiUrl.length).startsWith(route)))
       return next.handle(request);
 
-    const authToken = this.tokenService.getAuthToken();
+    const authToken = TokenService.getAuthToken();
 
     // No auth-token means also no refresh token -> no point in refreshing
     if (authToken == null) {
@@ -44,13 +44,13 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
-      const token = this.tokenService.getRefreshToken();
+      const token = TokenService.getRefreshToken();
 
       if (token)
         return this.authService.refreshToken(token).pipe(
           switchMap((token: any) => {
             this.isRefreshing = false;
-            this.tokenService.saveAuthToken(token.access_token);
+            TokenService.saveAuthToken(token.access_token);
             this.refreshTokenSubject.next(token.access_token);
 
             return next.handle(this.addTokenHeader(request, token.access_token));
@@ -59,7 +59,7 @@ export class AuthInterceptor implements HttpInterceptor {
           catchError((err) => {
             this.isRefreshing = false;
 
-            this.tokenService.signOut();
+            TokenService.signOut();
             return throwError(() => err);
           })
         );

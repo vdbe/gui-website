@@ -1,0 +1,6 @@
+<div class="sm-p2 md:p-5">
+    <div class="task-card-container flex flex-wrap">
+        <app-task-card *ngFor="let task of shared.tasks;" [task]="task" [stateName]="shared.states | taskStateName :task.progress">
+        </app-task-card>
+    </div>
+</div>
