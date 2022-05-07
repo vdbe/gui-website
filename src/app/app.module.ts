@@ -25,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { TokenService } from './services/token/token.service';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { CreateStateComponent } from './components/create-state/create-state.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 
 @NgModule({
@@ -38,6 +39,7 @@ import { TasksComponent } from './components/tasks/tasks.component';
         TaskCardComponent,
         TaskStateNamePipe,
         CreateTaskComponent,
+        CreateStateComponent,
         TasksComponent,
     ],
     imports: [

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { CreateStateComponent } from './components/create-state/create-state.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TasksComponent } from './components/tasks/tasks.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
     {path: 'tasks', component: TasksComponent},
     {path: 'tasks/create', component: CreateTaskComponent},
+    {path: 'states/create', component: CreateStateComponent},
     //{path: '**', redirectTo: 'tasks'},
   ]},
   {path: 'register', component: AuthorizeComponent},
