@@ -15,3 +15,10 @@ export interface CreateTaskInput {
     description: string;
     state: number | string;
 }
+
+export interface updateTaskInput {
+    progress?: number;
+    title?: string;
+    description?: string;
+}
+

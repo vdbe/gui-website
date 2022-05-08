@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateStateComponent } from './create-state.component';
+import { CommonModule } from '@angular/common';
 
 describe('CreateStateComponent', () => {
     let component: CreateStateComponent;
@@ -13,7 +14,7 @@ describe('CreateStateComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule],
+            imports: [CommonModule, HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule],
             declarations: [CreateStateComponent]
         })
             .compileComponents();

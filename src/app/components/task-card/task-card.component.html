@@ -10,8 +10,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <a [class.disabled]="!enabled" mat-raised-button [routerLink]="['edit', task.nr]" color="primary">Edit</a>
     </mat-card-actions>
-  </mat-card>
+</mat-card>
 

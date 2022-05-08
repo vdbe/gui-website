@@ -100,11 +100,11 @@ export class TaskService {
     });
   }
 
-  updateTaskState(identifier: number, newState: number | string): Promise<State> {
+  updateTaskState(identifier: number, newState: number): Promise<State> {
     return new Promise<State>((resolve, reject) => {
-      this.http.patch(TASK_API + `/${identifier}/state`, {
-        progress: newState,
-      }, httpOptions)
+      this.http.patch(TASK_API + `/${identifier}/state`, JSON.stringify({
+        progress: Number(newState),
+      }), httpOptions)
         .subscribe({
           next: (res: any) => {
             resolve(res as State);

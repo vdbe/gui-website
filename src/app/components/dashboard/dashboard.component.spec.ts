@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +18,7 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardComponent, TaskCardComponent ],
-      imports: [RouterTestingModule, MatToolbarModule, MatIconModule, MatMenuModule, MatSidenavModule, BrowserAnimationsModule, HttpClientModule],
+      imports: [CommonModule, RouterTestingModule, MatToolbarModule, MatIconModule, MatMenuModule, MatSidenavModule, BrowserAnimationsModule, HttpClientModule],
     })
     .compileComponents();
   });

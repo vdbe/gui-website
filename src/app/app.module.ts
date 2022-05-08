@@ -27,6 +27,8 @@ import { TokenService } from './services/token/token.service';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { CreateStateComponent } from './components/create-state/create-state.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { UpdateTaskComponent } from './components/update-task/update-task.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -41,8 +43,10 @@ import { TasksComponent } from './components/tasks/tasks.component';
         CreateTaskComponent,
         CreateStateComponent,
         TasksComponent,
+        UpdateTaskComponent,
     ],
     imports: [
+        CommonModule,
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
