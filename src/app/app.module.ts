@@ -29,6 +29,7 @@ import { CreateStateComponent } from './components/create-state/create-state.com
 import { TasksComponent } from './components/tasks/tasks.component';
 import { UpdateTaskComponent } from './components/update-task/update-task.component';
 import { CommonModule } from '@angular/common';
+import { CustomPipePipe } from './pipes/custom-pipe.pipe';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { CommonModule } from '@angular/common';
         CreateStateComponent,
         TasksComponent,
         UpdateTaskComponent,
+        CustomPipePipe,
     ],
     imports: [
         CommonModule,

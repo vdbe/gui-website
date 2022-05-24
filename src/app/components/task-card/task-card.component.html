@@ -1,7 +1,7 @@
 <mat-card class="min-w-fit sm:m-3 m-4">
     <mat-card-header>
       <div mat-card-avar></div>
-      <mat-card-title>{{task.title}}</mat-card-title>
+      <mat-card-title>{{task.title | customPipe}}</mat-card-title>
       <mat-card-subtitle>{{stateName}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
