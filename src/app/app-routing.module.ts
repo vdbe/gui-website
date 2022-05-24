@@ -17,7 +17,7 @@ const routes: Routes = [
     {path: 'tasks/create', component: CreateTaskComponent},
     {path: 'tasks/edit/:nr', component: UpdateTaskComponent},
     {path: 'states/create', component: CreateStateComponent},
-    {path: '**', redirectTo: 'tasks'},
+    {path: '', redirectTo: 'tasks', pathMatch: 'full'},
   ]},
   {path: 'register', component: AuthorizeComponent},
   {path: 'login', component: AuthorizeComponent},
