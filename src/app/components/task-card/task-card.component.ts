@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { Task } from '../../interfaces/task';
+import { CustomPipePipe } from '../../pipes/custom-pipe.pipe';
 
 @Component({
   selector: 'app-task-card',

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
+import { CustomPipePipe } from '../../pipes/custom-pipe.pipe';
 import { Task } from '../../interfaces/task';
 
 import { TaskCardComponent } from './task-card.component';
@@ -10,7 +11,7 @@ describe('TaskCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskCardComponent ],
+      declarations: [ TaskCardComponent, CustomPipePipe ],
       imports: [MatCardModule],
     })
     .compileComponents();
