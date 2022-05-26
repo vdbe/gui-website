@@ -2,11 +2,14 @@
   <mat-form-field class="min-w-fit max-w-lg w-full" appearance="outline">
     <mat-label>Name</mat-label>
     <input type="text" matInput formControlName="name" [errorStateMatcher]="matcher" placeholder="Ex. Bob">
-    <mat-error *ngIf="registerForm.hasError('email', 'email') && !registerForm.hasError('required', 'email')">
-      Please enter a valid email address
+    <mat-error *ngIf="registerForm.hasError('minlength', 'name') && !registerForm.hasError('required', 'name')">
+      username must be 4 chararcters or longer
     </mat-error>
-    <mat-error *ngIf="registerForm.hasError('required', 'email')">
-      Email is <strong>required</strong>
+    <mat-error *ngIf="registerForm.hasError('maxlength', 'name') && !registerForm.hasError('required', 'name')">
+      username must be 10 chararcters or shorter
+    </mat-error>
+    <mat-error *ngIf="registerForm.hasError('required', 'name')">
+      Name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="min-w-fit max-w-lg w-full" appearance="outline">
